@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-variable "resource_group_name" {
+variable "name" {
   type = string
 }
 
-variable "name" {
+variable "resource_group_name" {
   type = string
 }
 
@@ -28,4 +28,14 @@ variable "location" {
 
 variable "aci_enabled" {
   type = bool
+}
+
+variable "vpn_enabled" {
+  type = bool
+}
+
+variable "vpn_certificate_file_path" {
+  type = string
+  default = ""
+  description = "The public certificate of the root certificate authority. The certificate must be provided in Base-64 encoded X.509 format (PEM)."
 }

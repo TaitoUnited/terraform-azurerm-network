@@ -7,14 +7,17 @@ provider "azurerm" {
 }
 
 module "network" {
-  source              = "TaitoUnited/network/azurerm"
-  version             = "1.0.0"
+  source               = "TaitoUnited/network/azurerm"
+  version              = "1.0.0"
 
-  resource_group_name = "my-infrastructure"
-  name                = "my-infrastructure"
-  location            = "northeurope"
+  name                 = "my-infrastructure"
+  resource_group_name  = "my-infrastructure"
+  location             = "northeurope"
 
-  aci_enabled         = false
+  aci_enabled          = false
+
+  vpn_enabled          = true
+  vpn_certificate_path = "certificate.pem"
 }
 ```
 

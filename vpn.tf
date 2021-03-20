@@ -14,29 +14,28 @@
  * limitations under the License.
  */
 
-resource "azurerm_virtual_network" "vnet" {
-  name                = var.name
-  address_space       = ["10.1.0.0/16"]
-  location            = var.location
-  resource_group_name = var.resource_group_name
-}
+module "vpn" {
+  source  = "kumarvna/vpn-gateway/azurerm"
+  version = "1.0.0"
 
-resource "azurerm_subnet" "subnet" {
-  name                 = "${var.name}-subnet"
+  # Resource Group, location, VNet and Subnet details
   resource_group_name  = var.resource_group_name
   virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefix       = "10.1.0.0/16"
-  service_endpoints    = ["Microsoft.Sql"]
+  vpn_gateway_name     = var.name
 
-  # Delegation for Kubernetes ACI support
-  dynamic "delegation" {
-    for_each = var.aci_enabled ? [ 1 ] : []
-    content {
-      name = "aciDelegation"
-      service_delegation {
-        name    = "Microsoft.ContainerInstance/containerGroups"
-        actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
-      }
-    }
+  # client configuration for Point-to-Site VPN Gateway connections
+  vpn_client_configuration = {
+    address_space        = "10.1.0.0/16"
+    vpn_client_protocols = ["OpenVPN"]
+    certificate          = trimspace(
+      replace(
+        replace(
+          file(${var.vpn_certificate_file_path}), "-----BEGIN CERTIFICATE-----", ""
+        ), "-----END CERTIFICATE-----", ""
+      )
+    )
+  }
+
+  tags = {
   }
 }

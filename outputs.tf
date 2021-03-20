@@ -14,10 +14,22 @@
  * limitations under the License.
  */
 
-output "main_network_id" {
-  value = azurerm_virtual_network.main
+output "virtual_network_id" {
+  value = azurerm_virtual_network.vnet.id
 }
 
-output "internal_subnet_id" {
-  value = azurerm_subnet.internal
+output "subnet_id" {
+  value = azurerm_subnet.subnet.id
+}
+
+output "vpn_gateway_id" {
+  value = module.vpn.vpn_gateway_id
+}
+
+output "vpn_gateway_public_ip" {
+  value = module.vpn.vpn_gateway_public_ip
+}
+
+output "vpn_gateway_public_ip_fqdn" {
+  value = module.vpn.vpn_gateway_public_ip_fqdn
 }
