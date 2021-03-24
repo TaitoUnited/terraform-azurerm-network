@@ -15,6 +15,9 @@
  */
 
 module "vpn" {
+  # TODO: vpn module does not support count
+  # count   = var.network.vpnEnabled ? 1 : 0
+
   source  = "kumarvna/vpn-gateway/azurerm"
   version = "1.0.0"
 
@@ -30,7 +33,7 @@ module "vpn" {
     certificate          = trimspace(
       replace(
         replace(
-          file(${var.vpn_certificate_file_path}), "-----BEGIN CERTIFICATE-----", ""
+          file(var.network.vpnCertificateFilePath), "-----BEGIN CERTIFICATE-----", ""
         ), "-----END CERTIFICATE-----", ""
       )
     )

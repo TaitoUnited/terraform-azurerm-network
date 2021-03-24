@@ -26,16 +26,11 @@ variable "location" {
   type = string
 }
 
-variable "aci_enabled" {
-  type = bool
-}
-
-variable "vpn_enabled" {
-  type = bool
-}
-
-variable "vpn_certificate_file_path" {
-  type = string
-  default = ""
-  description = "The public certificate of the root certificate authority. The certificate must be provided in Base-64 encoded X.509 format (PEM)."
+variable "network" {
+  type = object({
+    vpnEnabled = bool
+    vpnCertificateFilePath = optional(string)
+    aciEnabled = bool
+  })
+  description = "Resources as JSON (see README.md). You can read values from a YAML file with yamldecode()."
 }

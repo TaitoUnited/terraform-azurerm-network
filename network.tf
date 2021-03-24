@@ -30,7 +30,7 @@ resource "azurerm_subnet" "subnet" {
 
   # Delegation for Kubernetes ACI support
   dynamic "delegation" {
-    for_each = var.aci_enabled ? [ 1 ] : []
+    for_each = var.network.aciEnabled ? [ 1 ] : []
     content {
       name = "aciDelegation"
       service_delegation {
