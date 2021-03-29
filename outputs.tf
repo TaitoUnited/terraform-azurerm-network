@@ -22,6 +22,7 @@ output "subnet_id" {
   value = azurerm_subnet.subnet.id
 }
 
+/* TODO: enable
 output "vpn_gateway_id" {
   value = module.vpn.vpn_gateway_id
 }
@@ -33,3 +34,4 @@ output "vpn_gateway_public_ip" {
 output "vpn_gateway_public_ip_fqdn" {
   value = module.vpn.vpn_gateway_public_ip_fqdn
 }
+*/

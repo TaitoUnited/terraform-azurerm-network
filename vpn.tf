@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+/* TODO: requires old hashicorp/azurerm 2.27.x ?
 module "vpn" {
   # TODO: vpn module does not support count
   # count   = var.network.vpnEnabled ? 1 : 0
@@ -42,3 +43,4 @@ module "vpn" {
   tags = {
   }
 }
+*/
