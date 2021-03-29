@@ -22,10 +22,6 @@ output "subnet_id" {
   value = azurerm_subnet.subnet.id
 }
 
-output "private_dns_zone_id" {
-  value = azurerm_private_dns_zone.private_dns.id
-}
-
 /* TODO: enable
 output "vpn_gateway_id" {
   value = module.vpn.vpn_gateway_id
