@@ -14,28 +14,15 @@
  * limitations under the License.
  */
 
-output "virtual_network_id" {
-  value = azurerm_virtual_network.vnet.id
+resource "azurerm_private_dns_zone" "private_dns" {
+  name                = var.name
+  resource_group_name = var.resource_group_name
 }
 
-output "subnet_id" {
-  value = azurerm_subnet.subnet.id
+resource "azurerm_private_dns_zone_virtual_network_link" "private_dns_link" {
+  name                  = "${var.name}-private-dns-link"
+  resource_group_name   = var.resource_group_name
+  private_dns_zone_name = azurerm_private_dns_zone.private_dns.name
+  virtual_network_id    = azurerm_virtual_network.vnet.id
+  registration_enabled  = true
 }
-
-output "private_dns_zone_id" {
-  value = azurerm_private_dns_zone.private_dns.id
-}
-
-/* TODO: enable
-output "vpn_gateway_id" {
-  value = module.vpn.vpn_gateway_id
-}
-
-output "vpn_gateway_public_ip" {
-  value = module.vpn.vpn_gateway_public_ip
-}
-
-output "vpn_gateway_public_ip_fqdn" {
-  value = module.vpn.vpn_gateway_public_ip_fqdn
-}
-*/
