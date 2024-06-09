@@ -27,7 +27,7 @@ resource "azurerm_subnet" "subnet" {
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = [ "10.1.0.0/24" ]
 
-  enforce_private_link_endpoint_network_policies = true
+  private_endpoint_network_policies = "Enabled"
 
   # TODO: no longer required?
   # service_endpoints  = ["Microsoft.Sql"]
